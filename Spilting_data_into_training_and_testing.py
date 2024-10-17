@@ -15,7 +15,7 @@ from sklearn.model_selection import train_test_split
 X_train, X_test, Y_train, Y_test = train_test_split(x,y,test_size=0.4, random_state=1)
 
 model = linear_model.LinearRegression()
-model.fit(X_train, Y_train) #
+model.fit(X_train, Y_train) #for multiple linear regression, use like model.fit([X1_train, X2_train, X3_train], Y_train)
 
 predicted_values = model.predict(X_test)
 
