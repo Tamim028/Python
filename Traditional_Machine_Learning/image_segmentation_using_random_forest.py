@@ -99,6 +99,14 @@ from sklearn import metrics
 print("Accuracy =", metrics.accuracy_score(Y_test, predicted_values))
 
 
+#-----------Knowing Feature Importance for Random Forest (BuiltIn) Start --------
+
+features_list = list(X.columns)
+feature_importance = pd.Series(model.feature_importances_, index=features_list).sort_values(ascending=False)
+print(feature_importance)
+
+#-----------Knowing Feature Importance End --------
+
 
 
 
