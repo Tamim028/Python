@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 import pandas as pd
 
-img = cv2.imread('images/Train_images/Sandstone_Versa0000.tif')
+img = cv2.imread('images/RandomForest_ImgSeg_Train_images/Sandstone_Versa0000.tif')
 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 df = pd.DataFrame()
@@ -73,7 +73,7 @@ median_img1 = median_img.reshape(-1)
 df['Median s3'] = median_img1
 
 
-labeled_img = cv2.imread('images/Train_masks/Sandstone_Versa0000.tif')
+labeled_img = cv2.imread('images/RandomForest_ImgSeg_Train_masks/Sandstone_Versa0000.tif')
 labeled_img = cv2.cvtColor(labeled_img, cv2.COLOR_BGR2GRAY)
 labeled_img1 = labeled_img.reshape(-1)
 
