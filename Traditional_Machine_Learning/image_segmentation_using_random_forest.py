@@ -78,6 +78,7 @@ labeled_img = cv2.cvtColor(labeled_img, cv2.COLOR_BGR2GRAY)
 labeled_img1 = labeled_img.reshape(-1)
 
 df['Label'] = labeled_img1
+
 print(df.head())
 
 Y = df['Label'].values
