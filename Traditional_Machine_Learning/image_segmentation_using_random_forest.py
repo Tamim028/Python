@@ -109,6 +109,24 @@ print(feature_importance)
 
 
 
+#SAVING model
+
+import pickle
+
+filename = 'sandstone_model'
+pickle.dump(model, open(filename, 'wb'))
+
+#Loading file
+load_model = pickle.load(open(filename, 'rb'))
+result = load_model.predict(X) #predict on all input data.
+
+segmented = result.reshape(img.shape)
+
+import matplotlib.pyplot as plt
+plt.imshow(segmented, cmap='jet')
+plt.imsave('segmented_rock.jpg', segmented, cmap='jet')
+
+
 
 
 
