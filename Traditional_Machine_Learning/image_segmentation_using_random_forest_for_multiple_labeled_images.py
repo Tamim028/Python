@@ -142,8 +142,9 @@ for image in os.listdir(img_path):  #iterate through each file
 ######################################                    
 #Update dataframe for images to include details for each image in the loop
     image_dataset = pd.concat([image_dataset, df], ignore_index=True)
-    print("Image DataSet")
-    print(image_dataset.head())
+    print("Image DataSet len: ", len(df))
+    
+print(image_dataset.tail())   
 
 ###########################################################
 # STEP 2: READ LABELED IMAGES (MASKS) AND CREATE ANOTHER DATAFRAME
@@ -176,12 +177,14 @@ for mask in os.listdir(mask_path):  #iterate through each file to perform some a
     df2['Mask_Name'] = mask
     
     mask_dataset = pd.concat([mask_dataset, df2], ignore_index=True)  #Update mask dataframe with all the info from each mask
-    print("MASK/Label DataSet ")
-    print(image_dataset.head())
+    print("MASK/Label DataSet len: ", len(df2))
+   
+print(mask_dataset.tail())    
 ################################################################
  #  STEP 3: GET DATA READY FOR RANDOM FOREST (or other classifier)
     # COMBINE BOTH DATAFRAMES INTO A SINGLE DATASET
 ###############################################################
+
 dataset = pd.concat([image_dataset, mask_dataset], axis=1)    #Concatenate both image and mask datasets
 
 #If you expect image and mask names to be the same this is where we can perform sanity check
