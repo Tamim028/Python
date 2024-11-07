@@ -1,12 +1,13 @@
-import keras
+from tensorflow import keras
 import os
 
-os.environ['KERAS_BACKEND'] = 'tensorflow'
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1' 
 
 WIDTH = HEIGHT = 64
 
 INPUT_SHAPE = (WIDTH, HEIGHT, 3)
 inp = keras.layers.Input(shape=INPUT_SHAPE)
+
 
 conv1 = keras.layers.Conv2D(32, kernel_size=(3,3), activation='relu', padding='same')(inp)
 pool1 = keras.layers.MaxPooling2D(pool_size=(2,2))(conv1)
@@ -31,5 +32,6 @@ drop4 = keras.layers.Dropout(0.2)(norm4)
 out = keras.layers.Dense(2, activation='sigmoid')(drop4)
 
 model = keras.Model(inputs=inp, outputs=out)
-model.compile(optimizer='adam', loss='categorical_crossentropy', metrics='accuracy')
-print(model.summary)
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+print(model.summary())
+
