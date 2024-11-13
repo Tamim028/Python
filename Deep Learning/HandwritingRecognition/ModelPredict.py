@@ -3,18 +3,24 @@ import cv2
 from PIL import Image
 import os   
 from tensorflow.keras.models import load_model
-from HandwritingDetection import HEIGHT, WIDTH
+# from HandwritingDetection import HEIGHT, WIDTH
+from HandwritingDetection import Handwriting
 
 model = load_model('best_handwriting_model.keras')
 print(model.summary())
 
+# HEIGHT = WIDTH = 64
+
+WIDTH = Handwriting.width
+HEIGHT = Handwriting.height
+IMAGE_CHANNELS = Handwriting.imageChannels
 
 
 def preprocess_image(img_path):
     img = Image.open(img_path).convert('RGB')  # Open image and convert to RGB
     img = img.resize((WIDTH, HEIGHT))          # Resize to match model's input size
     img_array = np.array(img).astype('float32') / 255.0  # Normalize to [0, 1]
-    img_array = img_array.reshape(1, WIDTH, HEIGHT, 3)   # Add batch dimension
+    img_array = img_array.reshape(1, WIDTH, HEIGHT, IMAGE_CHANNELS)   # Add batch dimension
     return img_array
 
 def predict_image(model, img_path):
@@ -23,8 +29,8 @@ def predict_image(model, img_path):
     label = np.argmax(prediction, axis=1)[0]  # Get index of the highest probability
     return "Handwriting" if label == 1 else "Printed"
 
-# Example usage:
-test_path = '/Users/tamim028/github/Python/Deep Learning/HandwritingRecognition/TestImages'
+# Example usage
+test_path = '/home/tamim/Machine_Learning/HandwritingRecognition/TestImages'
 
 for filename in os.listdir(test_path):
     if filename.endswith(('.png', '.jpg', '.jpeg', '.bmp', '.tiff')):
